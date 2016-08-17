@@ -104,4 +104,10 @@ class ConfigManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->config->saveConfigFile();
     }
+
+    public function testFailWriteConfig()
+    {
+        $this->setExpectedException('\RuntimeException');
+        $this->config->saveConfigFile('/invalid/path/test.php');
+    }
 }

@@ -8,7 +8,9 @@ namespace clagiordano\weblibs\configmanager;
  */
 class ConfigManager
 {
+    /** @var array $configData */
     private $configData = null;
+    /** @var string $configFilePath */
     private $configFilePath = null;
 
     /**
@@ -16,7 +18,6 @@ class ConfigManager
      * from argument $configFilePath
      *
      * @param string $configFilePath
-     *
      * @return ConfigManager
      */
     public function __construct($configFilePath = null)
@@ -51,7 +52,7 @@ class ConfigManager
      * @param bool $autoReloadConfig
      *
      * @return ConfigManager
-     * @throws \Exception
+     * @throws \RuntimeException
      */
     public function saveConfigFile($configFilePath = null, $autoReloadConfig = false)
     {
@@ -64,10 +65,12 @@ class ConfigManager
         $configFileContent .= var_export($this->configData, true);
         $configFileContent .= ";\n\n";
 
-        if ((is_writable($configFilePath) && is_writable(dirname($configFilePath)))) {
+        try {
             file_put_contents($configFilePath, $configFileContent);
-        } else {
-            throw new \Exception(__METHOD__ . ": File path '$configFilePath' is not writeable!");
+        } catch (\Exception $exc) {
+            throw new \RuntimeException(
+                __METHOD__ . ": Failed to write config file to path '{$configFilePath}'"
+            );
         }
 
         if ($autoReloadConfig) {
