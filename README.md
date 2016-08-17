@@ -3,7 +3,7 @@
 # weblibs-configmanager
 weblibs-configmanager is a tool library for easily read and access to php config array file and direct read/write configuration file / object.
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ba8db8b9-1af7-471b-965e-d055f23b6dce/big.png)](https://insight.sensiolabs.com/projects/ba8db8b9-1af7-471b-965e-d055f23b6dce)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/54c4e80c-ff15-4235-8bec-a4c71bbe3ba5/big.png)](https://insight.sensiolabs.com/projects/54c4e80c-ff15-4235-8bec-a4c71bbe3ba5)
 
 ## Why use weblibs-configmanager ?
 The purpose of this project is to propose a simple and lightweight library to manage php hierarchical configuration files.
