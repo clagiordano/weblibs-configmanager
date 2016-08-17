@@ -17,7 +17,7 @@ class ConfigManagerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->config = new ConfigManager("TestConfigData.php");
-        $this->assertInstanceOf('clagiordano\weblibs\php\Config', $this->config);
+        $this->assertInstanceOf('clagiordano\weblibs\configmanager\ConfigManager', $this->config);
 
         $this->assertFileExists($this->configFile);
         $this->config->loadConfig($this->configFile);
