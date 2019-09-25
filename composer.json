@@ -2,7 +2,7 @@
     "name": "clagiordano/weblibs-configmanager",
     "description": "weblibs-configmanager is a tool library for easily read and access to php config array file and direct read/write configuration file / object",
     "type": "library",
-    "license": "LGPL-3.0",
+    "license": "LGPL-3.0-or-later",
     "keywords": ["clagiordano", "weblibs", "configuration", "manager", "tool"],
     "authors": [
         {
@@ -20,7 +20,8 @@
         "php": ">=5.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "^4.8",
+        "clagiordano/phpunit-result-printer": "^1"
     },
     "autoload-dev": {
         "psr-4": {
