@@ -38,7 +38,7 @@ class ConfigManager
             $this->configFilePath = $configFilePath;
 
             if (file_exists($configFilePath)) {
-                $this->configData = require $configFilePath;
+                $this->configData = eval(str_replace(array('<?php', '?>'), '', file_get_contents($configFilePath)));
             }
         }
 
