@@ -70,6 +70,13 @@ class ConfigManager
 
         try {
             file_put_contents($configFilePath, $configFileContent);
+
+            if (is_callable('opcache_invalidate')) {
+                /**
+                 * Invalidate opcache for writed file if opcache is available
+                 */
+                opcache_invalidate($configFilePath, true);
+            }
         } catch (Exception $exc) {
             throw new RuntimeException(
                 __METHOD__ . ": Failed to write config file to path '{$configFilePath}'"
