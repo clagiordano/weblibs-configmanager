@@ -2,6 +2,9 @@
 
 namespace clagiordano\weblibs\configmanager;
 
+use Exception;
+use RuntimeException;
+
 /**
  * Class ConfigManager, class for easily read and access to php config array file.
  * @package clagiordano\weblibs\configmanager
@@ -52,7 +55,7 @@ class ConfigManager
      * @param bool $autoReloadConfig
      *
      * @return ConfigManager
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function saveConfigFile($configFilePath = null, $autoReloadConfig = false)
     {
@@ -67,8 +70,8 @@ class ConfigManager
 
         try {
             file_put_contents($configFilePath, $configFileContent);
-        } catch (\Exception $exc) {
-            throw new \RuntimeException(
+        } catch (Exception $exc) {
+            throw new RuntimeException(
                 __METHOD__ . ": Failed to write config file to path '{$configFilePath}'"
             );
         }
@@ -97,6 +100,7 @@ class ConfigManager
             if (!isset($configData[ $parts[ $i ] ])) {
                 $configData[ $parts[ $i ] ] = ($i === $length) ? [] : null;
             }
+
             $configData = &$configData[ $parts[ $i ] ];
         }
 
@@ -115,7 +119,9 @@ class ConfigManager
     {
         $stored = $this->getValuePointer($configPath);
 
-        return is_null($stored) ? $defaultValue : $stored;
+        return (is_null($stored)
+            ? $defaultValue
+            : $stored);
     }
 
     /**
