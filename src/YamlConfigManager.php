@@ -25,6 +25,10 @@ class YamlConfigManager extends AbstractConfigManager
 
             if (file_exists($configFilePath)) {
                 try {
+                    if (!is_callable('yaml_parse_file')) {
+                        throw new RuntimeException('Missing php-yaml extension');
+                    }
+
                     $this->configData = yaml_parse_file($configFilePath);
                 } catch (Exception $exception) {
                     throw new RuntimeException(
@@ -53,6 +57,10 @@ class YamlConfigManager extends AbstractConfigManager
         }
 
         try {
+            if (!is_callable('yaml_emit_file')) {
+                throw new RuntimeException('Missing php-yaml extension');
+            }
+
             yaml_emit_file($configFilePath, $this->configData);
         } catch (Exception $exception) {
             throw new RuntimeException(
