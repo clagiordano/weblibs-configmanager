@@ -60,9 +60,9 @@ class ConfigManager extends AbstractConfigManager
                  */
                 opcache_invalidate($configFilePath, true);
             }
-        } catch (Exception $exc) {
+        } catch (Exception $exception) {
             throw new RuntimeException(
-                __METHOD__ . ": Failed to write config file to path '{$configFilePath}'"
+                "Failed to write config file to path '{$configFilePath}'\n{$exception->getMessage()}"
             );
         }
 

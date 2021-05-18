@@ -24,7 +24,13 @@ class YamlConfigManager extends AbstractConfigManager
             $this->configFilePath = $configFilePath;
 
             if (file_exists($configFilePath)) {
-                $this->configData = yaml_parse_file($configFilePath);
+                try {
+                    $this->configData = yaml_parse_file($configFilePath);
+                } catch (Exception $exception) {
+                    throw new RuntimeException(
+                        "Failed to read config file from path '{$configFilePath}'\n{$exception->getMessage()}"
+                    );
+                }
             }
         }
 
@@ -48,9 +54,9 @@ class YamlConfigManager extends AbstractConfigManager
 
         try {
             yaml_emit_file($configFilePath, $this->configData);
-        } catch (Exception $exc) {
+        } catch (Exception $exception) {
             throw new RuntimeException(
-                __METHOD__ . ": Failed to write config file to path '{$configFilePath}'"
+                "Failed to write config file to path '{$configFilePath}'\n{$exception->getMessage()}"
             );
         }
 
