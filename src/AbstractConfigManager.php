@@ -18,11 +18,10 @@ abstract class AbstractConfigManager implements IConfigurable
      * from argument $configFilePath
      *
      * @param string $configFilePath
-     * @return IConfigurable
      */
     public function __construct($configFilePath = null)
     {
-        return $this->loadConfig($configFilePath);
+        $this->loadConfig($configFilePath);
     }
 
     /**
