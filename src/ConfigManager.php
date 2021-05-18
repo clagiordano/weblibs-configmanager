@@ -9,7 +9,7 @@ use RuntimeException;
  * Class ConfigManager, class for easily read and access to php config array file.
  * @package clagiordano\weblibs\configmanager
  */
-class ConfigManager
+class ConfigManager implements IConfigurable
 {
     /** @var array $configData */
     private $configData = null;
