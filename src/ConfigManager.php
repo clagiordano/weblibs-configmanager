@@ -9,7 +9,7 @@ use RuntimeException;
  * Class ConfigManager, class for easily read and access to php config array file.
  * @package clagiordano\weblibs\configmanager
  */
-class ConfigManager
+class ConfigManager implements IConfigurable
 {
     /** @var array $configData */
     private $configData = null;
@@ -21,7 +21,7 @@ class ConfigManager
      * from argument $configFilePath
      *
      * @param string $configFilePath
-     * @return ConfigManager
+     * @return IConfigurable
      */
     public function __construct($configFilePath = null)
     {
@@ -33,7 +33,7 @@ class ConfigManager
      *
      * @param null|string $configFilePath
      *
-     * @return ConfigManager
+     * @return IConfigurable
      */
     public function loadConfig($configFilePath = null)
     {
@@ -54,7 +54,7 @@ class ConfigManager
      * @param null|string $configFilePath
      * @param bool $autoReloadConfig
      *
-     * @return ConfigManager
+     * @return IConfigurable
      * @throws RuntimeException
      */
     public function saveConfigFile($configFilePath = null, $autoReloadConfig = false)
@@ -149,7 +149,7 @@ class ConfigManager
      * @param string $configPath
      * @param mixed $newValue
      *
-     * @return ConfigManager
+     * @return IConfigurable
      */
     public function setValue($configPath, $newValue)
     {

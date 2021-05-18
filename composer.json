@@ -30,7 +30,19 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit --no-coverage",
-        "coverage": "./vendor/bin/phpunit"
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor/bin/phpunit --no-coverage"
+        ],
+        "coverage": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -dzend_extension=xdebug.so ./vendor/bin/phpunit"
+        ],
+        "debug": "php -dxdebug.remote_autostart=On -dzend_extension=xdebug.so ./vendor/bin/phpunit"
+    },
+    "config": {
+        "platform": {
+            "php": "5.4"
+        }
     }
 }

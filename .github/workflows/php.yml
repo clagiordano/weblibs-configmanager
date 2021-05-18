@@ -8,11 +8,18 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-18.04 ]
+        php: [ '5.4', '5.5', '5.6', '7.1', '7.2', '7.3', '7.4' ]
+    name: PHP ${{ matrix.operating-system }} ${{ matrix.php }}
 
     steps:
     - uses: actions/checkout@v2
+    - uses: nanasess/setup-php@master
+      with:
+        php-version: ${{ matrix.php }}
 
     - name: Validate composer.json and composer.lock
       run: composer validate
