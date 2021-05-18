@@ -15,7 +15,7 @@ interface IConfigurable
      *
      * @param null|string $configFilePath
      *
-     * @return ConfigManager
+     * @return IConfigurable
      */
     public function loadConfig($configFilePath = null);
 
@@ -25,7 +25,7 @@ interface IConfigurable
      * @param null|string $configFilePath
      * @param bool $autoReloadConfig
      *
-     * @return ConfigManager
+     * @return IConfigurable
      * @throws RuntimeException
      */
     public function saveConfigFile($configFilePath = null, $autoReloadConfig = false);
@@ -55,7 +55,7 @@ interface IConfigurable
      * @param string $configPath
      * @param mixed $newValue
      *
-     * @return ConfigManager
+     * @return IConfigurable
      */
     public function setValue($configPath, $newValue);
 }

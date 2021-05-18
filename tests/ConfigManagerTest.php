@@ -17,6 +17,8 @@ class ConfigManagerTest extends TestCase
 
     public function setUp()
     {
+        parent::setUp();
+
         $this->config = new ConfigManager("TestConfigData.php");
         $this->assertInstanceOf('clagiordano\weblibs\configmanager\ConfigManager', $this->config);
 
