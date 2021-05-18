@@ -10,12 +10,24 @@
          stopOnFailure="false"
          verbose="true"
          printerClass="clagiordano\PhpunitResultPrinter\ResultPrinter"
-        >
+>
     <testsuites>
         <testsuite name="Package Test Suite">
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+
+    <php>
+        <ini name="display_errors" value="On"/>
+        <ini name="error_reporting" value="E_ALL"/>
+        <ini name="display_startup_errors" value="On"/>
+    </php>
 
     <logging>
         <log type="coverage-html" target="build/coverage/"/>

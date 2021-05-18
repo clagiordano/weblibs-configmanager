@@ -3,12 +3,13 @@
 namespace clagiordano\weblibs\configmanager\tests;
 
 use clagiordano\weblibs\configmanager\ConfigManager;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ConfigManagerTest
  * @package clagiordano\weblibs\configmanager\tests
  */
-class ConfigManagerTest extends \PHPUnit_Framework_TestCase
+class ConfigManagerTest extends TestCase
 {
     /** @var ConfigManager $config */
     private $config = null;
