@@ -23,7 +23,7 @@ jobs:
 
     - name: Install required extension
       #run: sudo apt-get install -yqq php-yaml
-      run: sudo pecl install yaml
+      run: sudo pecl channel-update pecl.php.net && sudo pecl install yaml-1.2.0
 
     - name: Validate composer.json and composer.lock
       run: composer validate
