@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-18.04 ]
-        php: [ '5.4', '5.5', '5.6', '7.1', '7.2', '7.3', '7.4' ]
+        php: [ '5.4' ] # , '5.5', '5.6', '7.1', '7.2', '7.3', '7.4'
     name: PHP ${{ matrix.operating-system }} ${{ matrix.php }}
 
     steps:
@@ -22,10 +22,11 @@ jobs:
         php-version: ${{ matrix.php }}
 
     - name: Install required extension
-      run: sudo apt-get install -yqq php-yaml
+      #run: sudo apt-get install -yqq php-yaml
+      run: sudo pecl install yaml
 
     - name: Validate composer.json and composer.lock
-      run: composer show --platform && composer validate
+      run: composer validate
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
