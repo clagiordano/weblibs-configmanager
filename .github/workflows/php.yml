@@ -22,9 +22,7 @@ jobs:
         php-version: ${{ matrix.php }}
 
     - name: Install required extension
-      run: sudo apt-get install -yqq php-yaml libyaml-dev \
-        && sudo pecl channel-update pecl.php.net \
-        && sudo pecl install yaml-1.3.2
+      run: sudo apt-get install -yqq php-yaml php${{ matrix.php }}-yaml libyaml-dev
 
     - name: Validate composer.json and composer.lock
       run: composer validate
