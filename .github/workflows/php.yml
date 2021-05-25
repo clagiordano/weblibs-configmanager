@@ -22,8 +22,11 @@ jobs:
         php-version: ${{ matrix.php }}
         extensions: yaml,json
 
-    - name: check tools version
-      run: php --version && php --ini && composer --version
+    - name: check php.ini extensions
+      run: php --ini
+
+    - name: check composer version
+      run: composer --version
 
     - name: Validate composer.json and composer.lock
       run: composer validate
