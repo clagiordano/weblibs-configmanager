@@ -23,7 +23,7 @@ jobs:
         extensions: yaml,json
 
     - name: check tools version
-      run: php -v && php --init && composer --version
+      run: php --version && php --ini && composer --version
 
     - name: Validate composer.json and composer.lock
       run: composer validate
