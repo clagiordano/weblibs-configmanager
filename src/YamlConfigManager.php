@@ -4,6 +4,7 @@ namespace clagiordano\weblibs\configmanager;
 
 use Exception;
 use RuntimeException;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class YamlConfigManager
@@ -25,11 +26,7 @@ class YamlConfigManager extends AbstractConfigManager
 
             if (file_exists($configFilePath)) {
                 try {
-                    if (!is_callable('yaml_parse_file')) {
-                        throw new RuntimeException('Missing php-yaml extension');
-                    }
-
-                    $this->configData = yaml_parse_file($configFilePath);
+                    $this->configData = Yaml::parse(file_get_contents($configFilePath));
                 } catch (Exception $exception) {
                     throw new RuntimeException(
                         "Failed to read config file from path '{$configFilePath}'\n{$exception->getMessage()}"
@@ -57,11 +54,8 @@ class YamlConfigManager extends AbstractConfigManager
         }
 
         try {
-            if (!is_callable('yaml_emit_file')) {
-                throw new RuntimeException('Missing php-yaml extension');
-            }
 
-            yaml_emit_file($configFilePath, $this->configData);
+            file_put_contents($configFilePath, Yaml::dump($this->configData, 2, 2));
         } catch (Exception $exception) {
             throw new RuntimeException(
                 "Failed to write config file to path '{$configFilePath}'\n{$exception->getMessage()}"
