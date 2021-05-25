@@ -1,9 +1,8 @@
-﻿![BuildStatus](https://travis-ci.org/clagiordano/weblibs-configmanager.svg?branch=master) ![License](https://img.shields.io/github/license/clagiordano/weblibs-configmanager.svg)
+﻿[![PHP Composer](https://github.com/clagiordano/weblibs-configmanager/actions/workflows/php.yml/badge.svg)](https://github.com/clagiordano/weblibs-configmanager/actions/workflows/php.yml) 
+[![SymfonyInsight](https://insight.symfony.com/projects/22045de8-2a4d-46fc-9233-4dbb4c407e1f/mini.svg)](https://insight.symfony.com/projects/22045de8-2a4d-46fc-9233-4dbb4c407e1f)
 
 # weblibs-configmanager
 weblibs-configmanager is a tool library for easily read and access to php config array file and direct read/write configuration file / object.
-
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/54c4e80c-ff15-4235-8bec-a4c71bbe3ba5/big.png)](https://insight.sensiolabs.com/projects/54c4e80c-ff15-4235-8bec-a4c71bbe3ba5)
 
 ## Why use weblibs-configmanager ?
 The purpose of this project is to propose a simple and lightweight library to manage php hierarchical configuration files.
