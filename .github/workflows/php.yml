@@ -20,6 +20,7 @@ jobs:
     - uses: nanasess/setup-php@master
       with:
         php-version: ${{ matrix.php }}
+        extensions: xdebug
 
     - name: check php version
       run: php --version
