@@ -20,7 +20,10 @@ jobs:
     - uses: nanasess/setup-php@master
       with:
         php-version: ${{ matrix.php }}
-        extensions: yaml
+        extensions: yaml,json
+
+    - name: check tools version
+      run: php -v && php --init && composer --version
 
     - name: Validate composer.json and composer.lock
       run: composer validate
