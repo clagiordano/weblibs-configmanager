@@ -37,8 +37,7 @@ jobs:
     - name: Run test suite
       run: ./vendor/bin/phpunit
 
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.COVERALLS_TOKEN }}
-        path-to-lcov: build/logs/clover.xml
+  - name: Upload coverage results to Coveralls
+    env:
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+    run: ./vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
