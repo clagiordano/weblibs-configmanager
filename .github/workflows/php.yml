@@ -21,8 +21,8 @@ jobs:
       with:
         php-version: ${{ matrix.php }}
 
-    - name: check php.ini extensions
-      run: php --ini
+    - name: check php version
+      run: php --version
 
     - name: check composer version
       run: composer --version
