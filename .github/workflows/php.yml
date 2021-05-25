@@ -20,7 +20,7 @@ jobs:
     - uses: nanasess/setup-php@master
       with:
         php-version: ${{ matrix.php }}
-        extensions: yaml,json
+        extensions: yaml, json
 
     - name: check php.ini extensions
       run: php --ini
