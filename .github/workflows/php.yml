@@ -22,7 +22,9 @@ jobs:
         php-version: ${{ matrix.php }}
 
     - name: Install required extension
-      run: sudo apt-get install -yqq php-yaml && sudo phpenmod yaml
+      run: sudo apt-get install -yqq php-yaml php-dev php-pear libyaml-dev \
+        && sudo pecl install yaml \
+        && sudo phpenmod yaml
 
     - name: Validate composer.json and composer.lock
       run: composer validate
