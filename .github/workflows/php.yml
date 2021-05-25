@@ -20,11 +20,7 @@ jobs:
     - uses: nanasess/setup-php@master
       with:
         php-version: ${{ matrix.php }}
-
-    - name: Install required extension
-      run: sudo apt-get install -yqq php-yaml \
-        && sudo phpenmod yaml \
-        && php --ini
+        extensions: yaml
 
     - name: Validate composer.json and composer.lock
       run: composer validate
