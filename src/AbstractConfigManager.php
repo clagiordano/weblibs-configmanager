@@ -92,4 +92,22 @@ abstract class AbstractConfigManager implements IConfigurable
 
         return $this;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getConfig()
+    {
+        return $this->configData;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setConfig(array $config)
+    {
+        $this->configData = $config;
+
+        return $this;
+    }
 }
