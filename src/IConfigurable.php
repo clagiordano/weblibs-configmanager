@@ -68,7 +68,7 @@ interface IConfigurable
     /**
      * Sets the whole internal configuration from array
      *
-     * @param null|array $config
+     * @param array $config
      * @return IConfigurable
      */
     public function setConfig($config);
