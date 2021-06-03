@@ -21,18 +21,9 @@ class YamlConfigManager extends AbstractConfigManager
      */
     public function loadConfig($configFilePath = null)
     {
-        if (!is_null($configFilePath)) {
-            $this->configFilePath = $configFilePath;
-
-            if (file_exists($configFilePath)) {
-                try {
-                    $this->configData = Yaml::parse(file_get_contents($configFilePath));
-                } catch (Exception $exception) {
-                    throw new RuntimeException(
-                        "Failed to read config file from path '{$configFilePath}'\n{$exception->getMessage()}"
-                    );
-                }
-            }
+        $this->configFilePath = $configFilePath;
+        if ($this->checkLoadable()) {
+            $this->configData = Yaml::parse(file_get_contents($configFilePath));
         }
 
         return $this;

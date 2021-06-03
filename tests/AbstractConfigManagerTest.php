@@ -144,6 +144,8 @@ abstract class AbstractConfigManagerTest extends TestCase
         self::assertSame(0755, $filePerms);
 
         $status = unlink($testFile);
+        exec("rm {$testFile}");
+
         self::assertTrue($status);
         self::assertFileNotExists($testFile);
     }
