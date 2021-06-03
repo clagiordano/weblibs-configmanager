@@ -8,27 +8,21 @@ namespace clagiordano\weblibs\configmanager;
  */
 class FileConverter implements IConvertable
 {
-    /** @var IConfigurable $source */
-    protected $source = null;
-    /** @var IConfigurable $target */
-    protected $target = null;
-
     /**
      * @inheritDoc
      */
-    public function __construct(IConfigurable $source, IConfigurable $target)
+    public static function convert(IConfigurable $source, IConfigurable $target)
     {
-        $this->source = $source;
-        $this->target = $target;
+        return $target->setConfig($source->getConfig());
     }
 
     /**
      * @inheritDoc
      */
-    public function convert()
+    public static function convertAndSave(IConfigurable $source, IConfigurable $target)
     {
-        $this->target->setConfig($this->source->getConfig());
+        $target->setConfig($source->getConfig());
 
-        $this->target->saveConfigFile();
+        return $target->saveConfigFile();
     }
 }

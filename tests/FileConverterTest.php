@@ -68,14 +68,24 @@ class FileConverterTest extends TestCase
      */
     public function canConvertOneFormatToAnother($sourceConfig, $sourceInstance, $targetConfig, $targetInstance)
     {
+        if (file_exists($targetConfig)) {
+            /**
+             * Drop target file if already existing
+             */
+            unlink($targetConfig);
+        }
+
         $source = new $sourceInstance($sourceConfig);
         self::assertInstanceOf($sourceInstance, $source);
 
         $target = new $targetInstance($targetConfig);
         self::assertInstanceOf($targetInstance, $target);
 
-        $converter = new FileConverter($source, $target);
-        $converter->convert();
+        $converted = FileConverter::convert($source, $target);
+        self::assertInstanceOf($targetInstance, $converted);
+
+        $converted = FileConverter::convertAndSave($source, $target);
+        self::assertInstanceOf($targetInstance, $converted);
 
         self::assertFileExists($targetConfig);
     }
@@ -89,21 +99,50 @@ class FileConverterTest extends TestCase
         $source = new ArrayConfigManager();
         $target = new YamlConfigManager(__DIR__ . '/../testsdata/sample_config_data.empty.converted.yml');
 
-        $converter = new FileConverter($source, $target);
-        $converter->convert();
+        $converted = FileConverter::convert($source, $target);
+        self::assertInstanceOf('\clagiordano\weblibs\configmanager\YamlConfigManager', $converted);
+
+        self::assertSame($target, $converted);
     }
 
     /**
      * @test
      */
-    public function canFailConversionOnInvalidTarget()
+    public function canSuccessConversionAndSaveOnInvalidSource()
+    {
+
+        $source = new ArrayConfigManager();
+        $target = new YamlConfigManager(__DIR__ . '/../testsdata/sample_config_data.empty.converted.yml');
+
+        $converted = FileConverter::convertAndSave($source, $target);
+        self::assertInstanceOf('\clagiordano\weblibs\configmanager\YamlConfigManager', $converted);
+
+        self::assertSame($target, $converted);
+    }
+
+    /**
+     * @test
+     */
+    public function cannotFailConversionOnInvalidTarget()
+    {
+        $source = new ArrayConfigManager(__DIR__ . '/../testsdata/sample_config_data.php');
+        $target = new YamlConfigManager();
+
+        $converted = FileConverter::convert($source, $target);
+        self::assertInstanceOf('\clagiordano\weblibs\configmanager\YamlConfigManager', $converted);
+    }
+
+    /**
+     * @test
+     */
+    public function canFailConversionAndSaveOnInvalidTarget()
     {
         self::setExpectedException('\RuntimeException');
 
         $source = new ArrayConfigManager(__DIR__ . '/../testsdata/sample_config_data.php');
         $target = new YamlConfigManager();
 
-        $converter = new FileConverter($source, $target);
-        $converter->convert();
+        $converted = FileConverter::convertAndSave($source, $target);
+        self::assertInstanceOf('\clagiordano\weblibs\configmanager\YamlConfigManager', $converted);
     }
 }

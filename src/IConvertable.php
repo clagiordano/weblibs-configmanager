@@ -9,16 +9,20 @@ namespace clagiordano\weblibs\configmanager;
 interface IConvertable
 {
     /**
-     * FileConverter constructor.
+     * Converts source config to target config format
      *
      * @param IConfigurable $source
      * @param IConfigurable $target
+     * @return IConfigurable
      */
-    public function __construct(IConfigurable $source, IConfigurable $target);
+    public static function convert(IConfigurable $source, IConfigurable $target);
 
     /**
-     * Converts source config to target config format
-     * @return void
+     * Converts source config to target config format and save it on target config file
+     *
+     * @param IConfigurable $source
+     * @param IConfigurable $target
+     * @return IConfigurable
      */
-    public function convert();
+    public static function convertAndSave(IConfigurable $source, IConfigurable $target);
 }
