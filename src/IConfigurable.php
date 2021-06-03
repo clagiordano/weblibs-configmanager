@@ -72,4 +72,13 @@ interface IConfigurable
      * @return IConfigurable
      */
     public function setConfig($config);
+
+    /**
+     * Converts the current instance into another one provided as argument,
+     * migrating its internal configuration and returning the new one.
+     *
+     * @param IConfigurable $target
+     * @return IConfigurable
+     */
+    public function convert(IConfigurable $target);
 }
