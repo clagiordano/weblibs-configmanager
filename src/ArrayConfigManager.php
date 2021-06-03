@@ -24,7 +24,13 @@ class ArrayConfigManager extends AbstractConfigManager
             $this->configFilePath = $configFilePath;
 
             if (file_exists($configFilePath)) {
-                $this->configData = require $configFilePath;
+                try {
+                    $this->configData = require $configFilePath;
+                } catch (Exception $exception) {
+                    throw new RuntimeException(
+                        "Failed to read config file from path '{$configFilePath}'\n{$exception->getMessage()}"
+                    );
+                }
             }
         }
 

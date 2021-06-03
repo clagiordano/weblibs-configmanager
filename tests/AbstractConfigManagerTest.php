@@ -103,4 +103,40 @@ abstract class AbstractConfigManagerTest extends TestCase
         $this->setExpectedException('\RuntimeException');
         $this->config->saveConfigFile('/invalid/path/test.sample');
     }
+
+    /**
+     * @test
+     * @group permissions
+     */
+    public function canRaiseExceptionOnUnreadableFile()
+    {
+        /**
+         * Create new temp file
+         */
+        $testFile = tempnam('/tmp', 'phpunit');
+        self::assertFileExists($testFile);
+
+        /**
+         * Make tempfile unreadable by everyone, but still writeable
+         */
+        $status = chmod($testFile, 0200);
+        self::assertTrue($status);
+
+        /**
+         * Check permissions it must be 0200 ( --w------- )
+         */
+        $filePerms = (fileperms($testFile) & 0777);
+        self::assertSame(0200, $filePerms);
+
+        /**
+         * Try to read that file, an exception must be thrown
+         */
+        self::setExpectedException('\RuntimeException');
+        $this->config->loadConfig($testFile);
+
+        /**
+         * Remove temp file
+         */
+        unlink($testFile);
+    }
 }
