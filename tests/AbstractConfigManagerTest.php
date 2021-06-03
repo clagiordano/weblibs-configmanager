@@ -113,7 +113,7 @@ abstract class AbstractConfigManagerTest extends TestCase
         /**
          * Create new temp file
          */
-        $testFile = tempnam('/tmp', 'phpunit');
+        $testFile = tempnam(__DIR__ . '/../testsdata', 'phpunit_');
         self::assertFileExists($testFile);
 
         /**
@@ -137,7 +137,15 @@ abstract class AbstractConfigManagerTest extends TestCase
         /**
          * Remove temp file
          */
-        unlink($testFile);
+        $status = chmod($testFile, 0744);
+        self::assertTrue($status);
+
+        $filePerms = (fileperms($testFile) & 0777);
+        self::assertSame(0755, $filePerms);
+
+        $status = unlink($testFile);
+        self::assertTrue($status);
+        self::assertFileNotExists($testFile);
     }
 
     /**
