@@ -139,4 +139,51 @@ abstract class AbstractConfigManagerTest extends TestCase
          */
         unlink($testFile);
     }
+
+    /**
+     * @return array
+     */
+    public function configDataProvider()
+    {
+        return [
+            [
+                __DIR__ . '/../testsdata/sample_config_data.converted.yml',
+                '\clagiordano\weblibs\configmanager\YamlConfigManager',
+            ],
+            [
+                __DIR__ . '/../testsdata/sample_config_data.converted.json',
+                '\clagiordano\weblibs\configmanager\JsonConfigManager',
+            ],
+            [
+                __DIR__ . '/../testsdata/sample_config_data.converted.php',
+                '\clagiordano\weblibs\configmanager\ArrayConfigManager',
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider configDataProvider
+     * @param mixed $targetConfig
+     * @param mixed $targetInstance
+     */
+    public function canConvertOneFormatToAnother($targetConfig, $targetInstance)
+    {
+        if (file_exists($targetConfig)) {
+            /**
+             * Drop target file if already existing
+             */
+            unlink($targetConfig);
+        }
+
+        self::assertFileNotExists($targetConfig);
+
+        $target = new $targetInstance($targetConfig);
+        self::assertInstanceOf($targetInstance, $target);
+
+        $converted = $this->config->convert($target);
+        self::assertInstanceOf($targetInstance, $converted);
+
+        self::assertFileNotExists($targetConfig);
+    }
 }

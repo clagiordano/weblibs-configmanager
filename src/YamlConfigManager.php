@@ -54,7 +54,10 @@ class YamlConfigManager extends AbstractConfigManager
         }
 
         try {
-            file_put_contents($configFilePath, Yaml::dump($this->configData, 2, 2));
+            file_put_contents(
+                $configFilePath,
+                Yaml::dump($this->configData, 2, 2)
+            );
         } catch (Exception $exception) {
             throw new RuntimeException(
                 "Failed to write config file to path '{$configFilePath}'\n{$exception->getMessage()}"
