@@ -16,6 +16,32 @@ abstract class AbstractConfigManagerTest extends TestCase
     /** @var IConfigurable $config */
     protected $config = null;
 
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+
+        /**
+         * Remove temp dir
+         */
+        shell_exec("rm -rf " . __DIR__ . '/../testsdata/temp');
+
+        /**
+         * Create temp dir
+         */
+        $status = mkdir(__DIR__ . '/../testsdata/temp/');
+        self::assertTrue($status);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+
+        /**
+         * Remove temp dir
+         */
+        shell_exec("rm -rf " . __DIR__ . '/../testsdata/temp');
+    }
+
     public function testBasicUsage()
     {
         $this->assertNotNull(
@@ -113,7 +139,7 @@ abstract class AbstractConfigManagerTest extends TestCase
         /**
          * Create new temp file
          */
-        $testFile = tempnam(__DIR__ . '/../testsdata', 'phpunit_');
+        $testFile = tempnam(__DIR__ . '/../testsdata/temp/', 'phpunit_');
         self::assertFileExists($testFile);
 
         /**
