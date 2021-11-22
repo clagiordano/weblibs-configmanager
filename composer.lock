@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f98dd1d9d1b8f4986c6a54cc483c1166",
+    "content-hash": "5ae2a668088e704fc4d48f09d830189e",
     "packages": [
         {
             "name": "symfony/polyfill-ctype",
@@ -130,6 +130,9 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v2.8.52"
+            },
             "time": "2018-11-11T11:18:13+00:00"
         }
     ],
@@ -1709,5 +1712,5 @@
     "platform-overrides": {
         "php": "5.4"
     },
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }
